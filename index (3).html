@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library Work Record — Md Nurul Alam Niloy</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1209;
+    --parchment: #f5f0e8;
+    --amber: #c8860a;
+    --amber-light: #e8a020;
+    --rust: #8b3a1a;
+    --sage: #3d5a47;
+    --gold: #d4a017;
+    --cream: #faf7f0;
+    --border: #d4c9a8;
+    --shadow: rgba(26,18,9,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* === PAPER TEXTURE === */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* === HEADER === */
+  header {
+    position: relative;
+    background: var(--ink);
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .header-top-bar {
+    background: var(--amber);
+    height: 6px;
+    background: repeating-linear-gradient(90deg, var(--amber) 0, var(--amber) 60px, var(--gold) 60px, var(--gold) 70px, var(--rust) 70px, var(--rust) 80px, var(--amber) 80px);
+  }
+
+  .header-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 48px 60px 40px;
+    gap: 24px;
+    position: relative;
+  }
+
+  .header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--amber);
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .header-org {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: rgba(245,240,232,0.9);
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  .header-center {
+    text-align: center;
+  }
+
+  .seal {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--amber);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    background: radial-gradient(circle at 40% 40%, #2a1f0f, var(--ink));
+    box-shadow: 0 0 0 6px rgba(200,134,10,0.15), 0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  .seal::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    border: 1px dashed rgba(200,134,10,0.5);
+  }
+
+  .seal-book {
+    font-size: 32px;
+    line-height: 1;
+  }
+
+  .seal-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 7px;
+    color: var(--amber);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(200,134,10,0.15);
+    border: 1px solid var(--amber);
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .header-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(245,240,232,0.5);
+    letter-spacing: 0.08em;
+  }
+
+  .header-title-block {
+    text-align: center;
+    padding: 0 60px 52px;
+    position: relative;
+  }
+
+  .header-title-block::before {
+    content: '';
+    display: block;
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--amber), transparent);
+    margin: 0 auto 32px;
+  }
+
+  .main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    color: var(--parchment);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .main-title em {
+    color: var(--amber);
+    font-style: italic;
+  }
+
+  .header-subtitle {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    color: rgba(245,240,232,0.55);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 16px;
+    font-weight: 300;
+  }
+
+  /* === MAIN === */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* === PERSON CARD === */
+  .person-card {
+    background: var(--ink);
+    border-radius: 12px;
+    padding: 40px 48px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+    margin-bottom: 60px;
+    border: 1px solid rgba(200,134,10,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .person-card::before {
+    content: '📚';
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    font-size: 120px;
+    opacity: 0.06;
+    transform: rotate(-15deg);
+  }
+
+  .person-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--parchment);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .person-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--amber);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .person-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(245,240,232,0.65);
+  }
+
+  .meta-item .icon {
+    color: var(--amber);
+    font-size: 14px;
+  }
+
+  .status-pill {
+    background: rgba(139,58,26,0.3);
+    border: 1px solid var(--rust);
+    border-radius: 100px;
+    padding: 10px 24px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .status-pill .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: rgba(245,240,232,0.5);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .status-pill .value {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #e8856a;
+    font-weight: 700;
+  }
+
+  /* === SECTION TITLE === */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    margin-top: 56px;
+  }
+
+  .section-header:first-of-type {
+    margin-top: 0;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    background: rgba(200,134,10,0.1);
+    border: 1px solid rgba(200,134,10,0.3);
+    border-radius: 4px;
+    padding: 4px 10px;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* === SPREADSHEET GRID === */
+  .sheets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .sheet-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .sheet-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--amber);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  .sheet-card:hover {
+    box-shadow: 0 8px 32px var(--shadow);
+    transform: translateY(-2px);
+    border-color: var(--amber);
+  }
+
+  .sheet-card:hover::after {
+    transform: scaleX(1);
+  }
+
+  .sheet-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .ic-green { background: #e8f5e9; }
+  .ic-blue { background: #e3f2fd; }
+  .ic-orange { background: #fff3e0; }
+  .ic-purple { background: #f3e5f5; }
+  .ic-teal { background: #e0f2f1; }
+  .ic-red { background: #fce4ec; }
+  .ic-indigo { background: #e8eaf6; }
+  .ic-amber { background: #fff8e1; }
+
+  .sheet-info { flex: 1; min-width: 0; }
+
+  .sheet-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 4px;
+  }
+
+  .sheet-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .sheet-desc {
+    font-size: 12px;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  .sheet-arrow {
+    font-size: 16px;
+    color: var(--border);
+    transition: color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .sheet-card:hover .sheet-arrow {
+    color: var(--amber);
+    transform: translateX(3px);
+  }
+
+  /* === WEBSITE CARDS === */
+  .sites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  .site-card {
+    background: var(--ink);
+    border-radius: 12px;
+    padding: 28px;
+    border: 1px solid rgba(200,134,10,0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .site-card::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,134,10,0.15), transparent);
+  }
+
+  .site-card:hover {
+    border-color: var(--amber);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(200,134,10,0.2);
+    transform: translateY(-3px);
+  }
+
+  .site-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .site-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--parchment);
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .site-desc {
+    font-size: 13px;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .site-url {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    background: rgba(200,134,10,0.1);
+    border: 1px solid rgba(200,134,10,0.25);
+    border-radius: 6px;
+    padding: 8px 12px;
+    word-break: break-all;
+    line-height: 1.4;
+  }
+
+  /* === EMAIL SECTION === */
+  .email-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .email-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .email-card::before {
+    content: '✉';
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    font-size: 40px;
+    opacity: 0.07;
+  }
+
+  .email-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .email-field {
+    margin-bottom: 12px;
+  }
+
+  .field-label {
+    font-size: 10px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 4px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .field-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    display: block;
+    word-break: break-all;
+  }
+
+  /* === FOOTER === */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(200,134,10,0.2);
+    padding: 40px 60px;
+    text-align: center;
+    position: relative;
+  }
+
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--parchment);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .footer-credit {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(245,240,232,0.35);
+    letter-spacing: 0.15em;
+  }
+
+  .footer-credit span {
+    color: var(--amber);
+  }
+
+  .footer-divider {
+    width: 60px;
+    height: 1px;
+    background: rgba(200,134,10,0.4);
+    margin: 16px auto;
+  }
+
+  /* === INTRO TEXT === */
+  .intro-text {
+    background: linear-gradient(135deg, #fff9f0, white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--amber);
+    border-radius: 0 10px 10px 0;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  .intro-text strong {
+    color: var(--ink);
+    font-style: normal;
+  }
+  .seal {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;      /* makes circle */
+  overflow: hidden;        /* crop image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #000;  /* optional border */
+}
+
+.seal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* perfect fit */
+}
+
+  /* === ANIMATIONS === */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .sheet-card, .site-card, .email-card, .person-card {
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .sheet-card:nth-child(2) { animation-delay: 0.05s; }
+  .sheet-card:nth-child(3) { animation-delay: 0.10s; }
+  .sheet-card:nth-child(4) { animation-delay: 0.15s; }
+  .sheet-card:nth-child(5) { animation-delay: 0.20s; }
+  .sheet-card:nth-child(6) { animation-delay: 0.25s; }
+  .sheet-card:nth-child(7) { animation-delay: 0.30s; }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .header-inner { grid-template-columns: 1fr; text-align: center; padding: 32px 24px 24px; }
+    .header-right { text-align: center; }
+    .header-title-block { padding: 0 24px 40px; }
+    .person-card { grid-template-columns: 1fr; padding: 28px 24px; }
+    .status-pill { justify-self: start; }
+    .email-grid { grid-template-columns: 1fr; }
+    footer { padding: 32px 24px; }
+    .person-meta { gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top-bar"></div>
+  <div class="header-inner">
+    <div class="header-left">
+      <span class="header-label">Institution</span>
+      <div class="header-org">Safeer Academy<br>Library Department</div>
+    </div>
+    <div class="header-center">
+  <div class="seal">
+    <img src="images.png" alt="Library Logo">
+  </div>
+</div>
+</div>
+    <div class="header-right">
+      <div class="badge">WORK RECORD</div>
+      <div class="header-date">Chittagong, Bangladesh</div>
+    </div>
+  </div>
+  <div class="header-title-block">
+    <h1 class="main-title">Library <em>Handover</em><br>& Work Record</h1>
+    <p class="header-subtitle">Complete Documentation of Library Management Work</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- PERSON CARD -->
+  <div class="person-card">
+    <div>
+      <div class="person-name">Md Nurul Alam Niloy</div>
+      <div class="person-role">libraryian</div>
+      <div class="person-meta">
+        <span class="meta-item"><span class="icon">🏫</span> Safeer Academy, Chittagong</span>
+        <!-- <span class="meta-item"><span class="icon">🎓</span> BSc in CSE</span>
+        <span class="meta-item"><span class="icon">📍</span> Bangladesh</span> -->
+      </div>
+    </div>
+    <div class="status-pill">
+      <span class="label">Status</span>
+      <!-- <span class="value">Leaving</span> -->
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-text">
+    This page serves as the <strong>official handover documentation</strong> for all library management work completed during my tenure at Safeer Academy Library. All spreadsheet records, web tools, and login credentials are compiled here for seamless transition to the next in-charge. All data, systems, and tools built remain fully operational.
+  </div>
+
+  <!-- SPREADSHEET RECORDS -->
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Spreadsheet Records</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="sheets-grid">
+
+    <a href="https://docs.google.com/spreadsheets/d/1V2pFrxzSqLODWW5F14Pv4M3MSvvHW19sxY2VVyg9ZOM/edit?gid=0#gid=0" target="_blank" class="sheet-card">
+      <div class="sheet-icon-wrap ic-blue">📋</div>
+      <div class="sheet-info">
+        <div class="sheet-label">Record Sheet</div>
+        <div class="sheet-name">Teachers Books Taken & Return List</div>
+        <div class="sheet-desc">Tracks all books issued to and returned by teachers with dates and details.</div>
+      </div>
+      <div class="sheet-arrow">→</div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1W-xWpOwkZGWcStvvpo4BnFIvzY-wDsWPRa0elq0mRz4/edit?gid=0#gid=0" target="_blank" class="sheet-card">
+      <div class="sheet-icon-wrap ic-green">💰</div>
+      <div class="sheet-info">
+        <div class="sheet-label">Sales Sheet</div>
+        <div class="sheet-name">Books Sales & Details</div>
+        <div class="sheet-desc">Complete sales log with book names, prices, dates, and buyer information.</div>
+      </div>
+      <div class="sheet-arrow">→</div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1dHSQHJbcem4AmeuIDyS6b0mzIhVmYKVh_4QinlQXJkw/edit?gid=0#gid=0" target="_blank" class="sheet-card">
+      <div class="sheet-icon-wrap ic-orange">🌐</div>
+      <div class="sheet-info">
+        <div class="sheet-label">Online Sales</div>
+        <div class="sheet-name">Sales Record From Website</div>
+        <div class="sheet-desc">Auto-recorded sales data from the online invoice generator system.</div>
+      </div>
+      <div class="sheet-arrow">→</div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1inzQ7Trhm5Q2k_M3gyF-V4nrwa_S5u-iXXwoEr3AaiQ/edit?gid=2090458225#gid=2090458225" target="_blank" class="sheet-card">
+      <div class="sheet-icon-wrap ic-teal">📦</div>
+      <div class="sheet-info">
+        <div class="sheet-label">Stock Data</div>
+        <div class="sheet-name">Book Stock List Data for Website</div>
+        <div class="sheet-desc">Full inventory for website display — academic books with stock levels.</div>
+      </div>
+      <div class="sheet-arrow">→</div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1Zx7BBkEjdm6DSNJox8Ut8Z48ujSTr7PvsdLlDllMYME/edit?gid=0#gid=0" target="_blank" class="sheet-card">
+      <div class="sheet-icon-wrap ic-purple">📚</div>
+      <div class="sheet-info">
+        <div class="sheet-label">Non-Academic</div>
+        <div class="sheet-name">Non Academic Books Data</div>
+        <div class="sheet-desc">Catalogue of all non-academic, general, and reference books in the library.</div>
+      </div>
+      <div class="sheet-arrow">→</div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1aAMtnna-YODSpIdkFkZtHFQ39RhOvweJc4C_-gjrv3g/edit?gid=632441286#gid=632441286" target="_blank" class="sheet-card">
+      <div class="sheet-icon-wrap ic-indigo">📥</div>
+      <div class="sheet-info">
+        <div class="sheet-label">Acquisitions</div>
+        <div class="sheet-name">New Receive Books Data</div>
+        <div class="sheet-desc">Records of newly acquired books including source, date, and quantity received.</div>
+      </div>
+      <div class="sheet-arrow">→</div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1rqEzcoPiU62hAJcRmyAyv1xWzWaGcjMbOJHaHhtAU7I/edit?gid=0#gid=0" target="_blank" class="sheet-card">
+      <div class="sheet-icon-wrap ic-red">🎁</div>
+      <div class="sheet-info">
+        <div class="sheet-label">Gift Record</div>
+        <div class="sheet-name">Book Taken for Gift</div>
+        <div class="sheet-desc">Tracks books withdrawn from stock for gifting purposes with approval notes.</div>
+      </div>
+      <div class="sheet-arrow">→</div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1IC_tpnS1kjcuxCk8xkMlDZN15Pb9q0enII3NuX2-NcI/edit?gid=193846663#gid=193846663" target="_blank" class="sheet-card">
+      <div class="sheet-icon-wrap ic-amber">🚌</div>
+      <div class="sheet-info">
+        <div class="sheet-label">2026 Event</div>
+        <div class="sheet-name">Data for Study Tour 2026</div>
+        <div class="sheet-desc">Student and logistics data compiled for the Safeer Academy Study Tour 2026.</div>
+      </div>
+      <div class="sheet-arrow">→</div>
+    </a>
+
+  </div>
+
+  <!-- WEB SYSTEMS -->
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Websites & Software Built</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="sites-grid">
+
+    <a href="https://niloy-65.github.io/Book_List/" target="_blank" class="site-card">
+      <span class="site-tag">Sales Tool · Invoice</span>
+      <div class="site-name">Book Sales Invoice Generator & Auto Data Record</div>
+      <div class="site-desc">Custom-built web app for generating book sales invoices. Automatically records each transaction to the Google Sheets sales database in real time.</div>
+      <div class="site-url">🔗 niloy-65.github.io/Book_List/</div>
+    </a>
+
+    <a href="https://safeerlibrary.github.io/Books_Database/" target="_blank" class="site-card">
+      <span class="site-tag">Public Catalogue · Database</span>
+      <div class="site-name">Library Books Record</div>
+      <div class="site-desc">Public-facing catalogue of the Safeer Academy Library collection. Students and staff can search and browse available books by category and availability.</div>
+      <div class="site-url">🔗 safeerlibrary.github.io/Books_Database/</div>
+    </a>
+
+    <a href="https://niloy-65.github.io/Book_Admin_Pannel/" target="_blank" class="site-card">
+      <span class="site-tag">Admin · Control Panel</span>
+      <div class="site-name">Library Books Record Update & Controls Panel</div>
+      <div class="site-desc">Secure admin panel for managing and updating the library book database. Handles stock updates, new arrivals, and record corrections with full CRUD access.</div>
+      <div class="site-url">🔗 niloy-65.github.io/Book_Admin_Pannel/</div>
+    </a>
+
+  </div>
+
+  <!-- EMAIL CREDENTIALS -->
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Library Account Credentials</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- <div class="email-grid">
+
+    <div class="email-card">
+      <div class="email-num">Gmail Account — 01</div>
+      <div class="email-field">
+        <div class="field-label">Email Address</div>
+        <span class="field-value">safeerlibrary001@gmail.com</span>
+      </div>
+      <div class="email-field">
+        <div class="field-label">Password</div>
+        <span class="field-value">Safeer2025</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-num">Gmail Account — 02</div>
+      <div class="email-field">
+        <div class="field-label">Email Address</div>
+        <span class="field-value">librarysafeer@gmail.com</span>
+      </div>
+      <div class="email-field">
+        <div class="field-label">Password</div>
+        <span class="field-value">SA@2025#</span>
+      </div>
+    </div>
+
+  </div> -->
+
+</main>
+
+<footer>
+  <div class="footer-name">Md Nurul Alam Niloy</div>
+  <div class="footer-divider"></div>
+  <div class="footer-credit">
+  Designed & Built by 
+  <a href="https://niloy-65.github.io/portfolio1/" target="_blank" rel="noopener noreferrer">
+    <span>NA_Niloy</span>
+  </a> · Safeer Academy Library · Chittagong, Bangladesh
+</div>
+</footer>
+
+</body>
+</html>
